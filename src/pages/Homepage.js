@@ -10,21 +10,23 @@ class Homepages extends React.Component {
     this.state = {
       inputName: '',
       List: [],
+      // categories: '',
     };
   }
 
   handleChange = ({ target }) => {
-    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { value, name } = target;
     this.setState({
-      [target.name]: value,
+      [name]: value,
     });
   }
 
-  Search = async () => {
-    const { inputValue } = this.state;
-    const request = await getProductsFromCategoryAndQuery('', inputValue);
+  Search = async (id) => {
+    const { inputName } = this.state;
+    const request = await getProductsFromCategoryAndQuery(id, inputName);
     this.setState({
       List: request.results,
+      inputName: '',
     });
   }
 
@@ -55,7 +57,8 @@ class Homepages extends React.Component {
         </header>
         <aside>
           <CategoriesList
-            onChange={ this.handleChange }
+            handleInput={ this.handleChange }
+            search={ this.Search }
           />
         </aside>
         <main>
