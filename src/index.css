@@ -1,13 +1,69 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+}
+
+body {
+  background-color: whitesmoke;
+  font-family: -apple-system , BlinkMacSystemFont , Segoe UI , Roboto , Oxygen , Ubuntu , Cantarell , Fira Sans , Droid Sans , Helvetica Neue , sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.homepage {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+
+.homepage-header {
+  align-items: center;
+  display: flex;
+  grid-column: 2;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+aside {
+  grid-row: 1 / span 2;
+}
+
+main {
+  text-align: center;
+}
+
+.search-box {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.input-field, .btn {
+  border: none;
+  border-radius: 20px;
+  margin: 3px;
+  outline: none;
+  padding: 8px;
+}
+
+.input-field {
+  background-color: white;
+  border: 1px solid gray;
+  width: 500px;
+}
+
+.btn {
+  background-color: rgb(58, 58, 58);
+  color: white;
+}
+
+.categories-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.categories-container label {
+  border-bottom: 1px solid black;
+  padding: 8px;
 }
