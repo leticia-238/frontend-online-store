@@ -8,27 +8,30 @@ class Homepages extends React.Component {
   constructor() {
     super();
     this.state = {
-      inputValue: '',
+      inputName: '',
       List: [],
+      // categories: '',
     };
   }
 
   handleChange = ({ target }) => {
+    const { value, name } = target;
     this.setState({
-      inputValue: target.value,
+      [name]: value,
     });
   }
 
-  Search = async () => {
-    const { inputValue } = this.state;
-    const request = await getProductsFromCategoryAndQuery('', inputValue);
+  Search = async (id) => {
+    const { inputName } = this.state;
+    const request = await getProductsFromCategoryAndQuery(id, inputName);
     this.setState({
       List: request.results,
+      inputName: '',
     });
   }
 
   render() {
-    const { inputValue, List } = this.state;
+    const { inputName, List } = this.state;
     return (
       <div className="homepage">
         <header className="homepage-header">
@@ -38,7 +41,7 @@ class Homepages extends React.Component {
               type="text"
               name="inputName"
               onChange={ this.handleChange }
-              value={ inputValue }
+              value={ inputName }
               className="input-field"
             />
             <button
@@ -53,7 +56,10 @@ class Homepages extends React.Component {
           <ButtonCart />
         </header>
         <aside>
-          <CategoriesList />
+          <CategoriesList
+            handleInput={ this.handleChange }
+            search={ this.Search }
+          />
         </aside>
         <main>
           <h1 data-testid="home-initial-message">

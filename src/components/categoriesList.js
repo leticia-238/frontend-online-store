@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class CategoriesList extends React.Component {
@@ -15,12 +16,9 @@ class CategoriesList extends React.Component {
     });
   }
 
-  handleInput = ({ target: { name, checked } }) => {
-    this.setState({ [name]: checked });
-  }
-
   render() {
-    const { categoriesList, ...rest } = this.state;
+    const { categoriesList } = this.state;
+    const { search } = this.props;
     return (
       <div className="categories-container">
         Categorias
@@ -30,9 +28,10 @@ class CategoriesList extends React.Component {
               type="radio"
               name="categories"
               id={ id }
-              checked={ rest[name] }
-              onChange={ this.handleInput }
-              value={ name }
+              onChange={ () => {
+                search(id);
+              } }
+              value={ id }
             />
             { name }
           </label>
@@ -41,5 +40,9 @@ class CategoriesList extends React.Component {
     );
   }
 }
+
+CategoriesList.propTypes = {
+  search: PropTypes.func.isRequired,
+};
 
 export default CategoriesList;
