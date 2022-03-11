@@ -2,13 +2,6 @@ import React from 'react';
 import { getCategories } from '../services/api';
 
 class CategoriesList extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      categoriesList: [],
-    };
-  }
-
   componentDidMount() {
     getCategories().then((categories) => {
       this.setState({ categoriesList: categories });

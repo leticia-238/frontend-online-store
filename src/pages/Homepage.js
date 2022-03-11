@@ -8,14 +8,15 @@ class Homepages extends React.Component {
   constructor() {
     super();
     this.state = {
-      inputValue: '',
+      inputName: '',
       List: [],
     };
   }
 
   handleChange = ({ target }) => {
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
-      inputValue: target.value,
+      [target.name]: value,
     });
   }
 
@@ -28,7 +29,7 @@ class Homepages extends React.Component {
   }
 
   render() {
-    const { inputValue, List } = this.state;
+    const { inputName, List } = this.state;
     return (
       <div className="homepage">
         <header className="homepage-header">
@@ -38,7 +39,7 @@ class Homepages extends React.Component {
               type="text"
               name="inputName"
               onChange={ this.handleChange }
-              value={ inputValue }
+              value={ inputName }
               className="input-field"
             />
             <button
@@ -53,7 +54,9 @@ class Homepages extends React.Component {
           <ButtonCart />
         </header>
         <aside>
-          <CategoriesList />
+          <CategoriesList
+            onChange={ this.handleChange }
+          />
         </aside>
         <main>
           <h1 data-testid="home-initial-message">
