@@ -71,6 +71,7 @@ class Homepages extends React.Component {
               title={ title }
               price={ price }
               image={ thumbnail }
+              id={ id }
             />
           )) }
         </main>
