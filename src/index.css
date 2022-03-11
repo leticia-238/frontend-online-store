@@ -6,56 +6,64 @@
 
 body {
   background-color: whitesmoke;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system , BlinkMacSystemFont , Segoe UI , Roboto , Oxygen , Ubuntu , Cantarell , Fira Sans , Droid Sans , Helvetica Neue , sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.homepage{
+.homepage {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
 }
 
 
-.homepage-header{
-  display: flex;
-  padding: 10px;
+.homepage-header {
   align-items: center;
-  justify-content: space-between;
+  display: flex;
   grid-column: 2;
+  justify-content: space-between;
+  padding: 10px;
 }
 
-aside{
+aside {
   grid-row: 1 / span 2;
 }
 
-main{
+main {
   text-align: center;
 }
 
-.search-box{
+.search-box {
   flex-grow: 1;
   text-align: center;
 }
 
-.input-field,.btn{
+.input-field, .btn {
   border: none;
-  outline: none;
-  padding: 8px;
   border-radius: 20px;
   margin: 3px;
+  outline: none;
+  padding: 8px;
 }
 
-.input-field{
+.input-field {
   background-color: white;
   border: 1px solid gray;
   width: 500px;
 }
 
-.btn{
+.btn {
   background-color: rgb(58, 58, 58);
   color: white;
+}
+
+.categories-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.categories-container label {
+  border-bottom: 1px solid black;
+  padding: 8px;
 }
