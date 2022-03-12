@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductFromId } from '../services/api';
+import FormComents from '../components/FormComents';
 
 class Item extends React.Component {
   constructor() {
@@ -25,6 +26,7 @@ class Item extends React.Component {
         <h3 data-testid="product-detail-name">
           {productInfo.title }
         </h3>
+        <FormComents />
       </div>
     );
   }
