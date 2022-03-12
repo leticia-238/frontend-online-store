@@ -67,3 +67,8 @@ main {
   border-bottom: 1px solid black;
   padding: 8px;
 }
+
+.buttonCart {
+  color: black;
+  font-size: 35px;
+}
