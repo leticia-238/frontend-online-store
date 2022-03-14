@@ -8,6 +8,9 @@ export const addCart = (title) => {
 };
 
 export const getCart = () => {
+  const objeto = [];
   const titlePrev = JSON.parse(localStorage.getItem('cartItems'));
-  return titlePrev;
+  titlePrev.forEach(({ produto, preco }) => { objeto[produto] = { price: preco }; });
+  console.log(objeto);
+  return objeto;
 };

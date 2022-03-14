@@ -5,8 +5,11 @@ import { addCart } from '../services/cartFunctions';
 
 class ProductCard extends React.Component {
   handleClick = () => {
-    const { title } = this.props;
-    addCart(title);
+    const { title, price } = this.props;
+    addCart({
+      produto: title,
+      preco: price,
+    });
   }
 
   render() {

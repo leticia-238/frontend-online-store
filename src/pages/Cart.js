@@ -19,12 +19,26 @@ class Cart extends React.Component {
               <div>
                 {
                   productCart.map((product) => (
-                    <p
-                      data-testid="shopping-cart-product-name"
-                      key={ product }
-                    >
-                      {product}
-                    </p>
+                    <div key={ product }>
+                      <h2
+                        data-testid="shopping-cart-product-name"
+
+                      >
+                        {product}
+                      </h2>
+                      <button
+                        type="button"
+                        data-testid="product-increase-quantity"
+                      >
+                        <h2>+</h2>
+                      </button>
+                      <button
+                        type="button"
+                        data-testid="product-decrease-quantity"
+                      >
+                        <h2>-</h2>
+                      </button>
+                    </div>
                   ))
                 }
                 <h3
