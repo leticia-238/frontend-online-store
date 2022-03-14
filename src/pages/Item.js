@@ -22,7 +22,10 @@ class Item extends React.Component {
 
   handleClick = () => {
     const { productInfo } = this.state;
-    addCart(productInfo.title);
+    addCart({
+      produto: productInfo.title,
+      preco: productInfo.price,
+    });
   }
 
   render() {
