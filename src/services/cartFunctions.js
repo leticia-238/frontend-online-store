@@ -8,9 +8,16 @@ export const addCart = (title) => {
 };
 
 export const getCart = () => {
-  const objeto = [];
-  const titlePrev = JSON.parse(localStorage.getItem('cartItems'));
-  titlePrev.forEach(({ produto, preco }) => { objeto[produto] = { price: preco }; });
-  console.log(objeto);
-  return objeto;
+  const objeto = {};
+  const productCart = JSON.parse(localStorage.getItem('cartItems'));
+  productCart.forEach(({ produto, preco }) => {
+    const qtd = productCart.filter((element) => element.produto === produto).length;
+    objeto[produto] = {
+      price: preco,
+      qtd,
+      totalPrice: qtd * preco,
+    };
+  });
+  const cart = Object.entries(objeto);
+  return cart;
 };
