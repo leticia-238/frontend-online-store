@@ -8,33 +8,31 @@ class Item extends React.Component {
   constructor() {
     super();
     this.state = {
-      productInfo: [],
+      title: '',
+      price: '',
     };
   }
 
   componentDidMount() {
     const { params: { id } } = this.props;
-    getProductFromId(id).then((response) => {
-      console.log(response);
-      this.setState({ productInfo: response });
+    getProductFromId(id).then(({ title, price, ...rest }) => {
+      console.log(rest);
+      this.setState({ title, price, id });
     });
   }
 
   handleClick = () => {
-    const { productInfo } = this.state;
-    addCart({
-      produto: productInfo.title,
-      preco: productInfo.price,
-    });
+    const { title, price, id } = this.state;
+    addCart({ title, price, id });
   }
 
   render() {
-    const { productInfo } = this.state;
+    const { title } = this.state;
     return (
       <div>
         <ButtonCart />
         <h3 data-testid="product-detail-name">
-          { productInfo.title }
+          { title }
         </h3>
         <button
           type="button"
@@ -49,7 +47,6 @@ class Item extends React.Component {
 }
 
 Item.propTypes = {
-  id: PropTypes.string.isRequired,
   params: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
