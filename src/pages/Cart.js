@@ -10,17 +10,19 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ productCart: getCart() });
+    this.setState({ productCart: [...getCart()] });
   }
 
-  increaseQuantity = (title) => {
-    addCart(title);
-    this.setState({ productCart: getCart() });
+  increaseQuantity = (product) => {
+    addCart(product);
+    this.setState({
+      productCart: [...getCart()],
+    });
   }
 
   decreaseQuantity = (title) => {
     removeCart(title);
-    this.setState({ productCart: getCart() });
+    this.setState({ productCart: [...getCart()] });
   }
 
   render() {
