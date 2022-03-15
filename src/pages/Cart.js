@@ -1,37 +1,61 @@
 import React from 'react';
-import { getCart } from '../services/cartFunctions';
+import CartItem from '../components/CartItem';
+import { addCart, getCart, removeCart } from '../services/cartFunctions';
 
 class Cart extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      productCart: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ productCart: [...getCart()] });
+  }
+
+  increaseQuantity = (product) => {
+    addCart(product);
+    this.setState({ productCart: [...getCart()] });
+  }
+
+  decreaseQuantity = (product) => {
+    removeCart(product);
+    this.setState({ productCart: [...getCart()] });
+  }
+
+  quantityProducts = () => {
+    const { productCart } = this.state;
+    let qtdTotal = 0;
+    productCart.forEach((arrayProduct) => {
+      qtdTotal += arrayProduct[1].qtd;
+    });
+    return qtdTotal;
+  }
+
   render() {
-    const productCart = getCart();
+    const { productCart } = this.state;
     return (
       <div>
         {
           productCart.length === 0
             ? (
-              <h2
-                data-testid="shopping-cart-empty-message"
-              >
+              <h2 data-testid="shopping-cart-empty-message">
                 Seu carrinho está vazio
               </h2>
             )
             : (
               <div>
                 {
-                  productCart.map((product) => (
-                    <p
-                      data-testid="shopping-cart-product-name"
-                      key={ product }
-                    >
-                      {product}
-                    </p>
-                  ))
+                  productCart.map(([title, productInfo]) => (
+                    <CartItem
+                      key={ title }
+                      title={ title }
+                      { ...productInfo }
+                      increaseQuantity={ this.increaseQuantity }
+                      decreaseQuantity={ this.decreaseQuantity }
+                    />))
                 }
-                <h3
-                  data-testid="shopping-cart-product-quantity"
-                >
-                  {`Quantidade de produtos: ${productCart.length}`}
-                </h3>
               </div>
             )
         }
