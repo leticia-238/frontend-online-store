@@ -3,6 +3,7 @@ import ButtonCart from '../components/buttonCart';
 import CategoriesList from '../components/categoriesList';
 import ProductCard from '../components/ProductCard';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getCart } from '../services/cartFunctions';
 
 class Homepages extends React.Component {
   constructor() {
@@ -10,9 +11,14 @@ class Homepages extends React.Component {
     this.state = {
       inputName: '',
       List: [],
-      // categories: '',
+      items: getCart().reduce((total, item) => (total + item[1].qtd), 0),
     };
   }
+
+  cartItemsCounter = () => {
+    const totalItems = getCart().reduce((total, item) => (total + item[1].qtd), 0);
+    this.setState({ items: totalItems });
+  };
 
   handleChange = ({ target }) => {
     const { value, name } = target;
@@ -31,7 +37,7 @@ class Homepages extends React.Component {
   }
 
   render() {
-    const { inputName, List } = this.state;
+    const { inputName, List, items } = this.state;
     return (
       <div className="homepage">
         <header className="homepage-header">
@@ -53,7 +59,7 @@ class Homepages extends React.Component {
               Pesquisar
             </button>
           </div>
-          <ButtonCart />
+          <ButtonCart items={ items } />
         </header>
         <aside>
           <CategoriesList
@@ -72,6 +78,7 @@ class Homepages extends React.Component {
               price={ price }
               image={ thumbnail }
               id={ id }
+              countItems={ this.cartItemsCounter }
               shipping={ shipping }
             />
           )) }
