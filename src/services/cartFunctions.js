@@ -25,12 +25,13 @@ export const removeCart = ({ title }) => {
 export const getCart = () => {
   const objeto = {};
   const productCart = JSON.parse(localStorage.getItem('cartItems'));
-  productCart.forEach(({ title, price }) => {
+  productCart.forEach(({ title, price, availableQtd }) => {
     const qtd = productCart.filter((element) => element.title === title).length;
     objeto[title] = {
       price,
       qtd,
       totalPrice: qtd * price,
+      availableQtd,
     };
   });
   const cart = Object.entries(objeto);
