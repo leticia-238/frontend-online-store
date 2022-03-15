@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FormComents from '../components/FormComents';
 import ButtonCart from '../components/buttonCart';
 import { getProductFromId } from '../services/api';
-import { addCart } from '../services/cartFunctions';
+import { addCart, getCart } from '../services/cartFunctions';
 
 class Item extends React.Component {
   constructor() {
@@ -11,6 +11,7 @@ class Item extends React.Component {
     this.state = {
       title: '',
       price: '',
+      items: getCart().reduce((total, item) => (total + item[1].qtd), 0),
     };
   }
 
@@ -25,17 +26,15 @@ class Item extends React.Component {
 
   handleClick = () => {
     const { title, price } = this.state;
-    addCart({
-      title,
-      price,
-    });
+    addCart({ title, price });
+    this.setState({ items: getCart().reduce((total, item) => (total + item[1].qtd), 0) });
   }
 
   render() {
-    const { title } = this.state;
+    const { title, items } = this.state;
     return (
       <div>
-        <ButtonCart />
+        <ButtonCart items={ items } />
         <h3 data-testid="product-detail-name">
           { title }
         </h3>

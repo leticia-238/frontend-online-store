@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 import { addCart } from '../services/cartFunctions';
 
 class ProductCard extends React.Component {
-  handleClick = () => {
+  handleClick = (countItems) => {
     const { title, price } = this.props;
     addCart({
       title,
       price,
     });
+    countItems();
   }
 
   render() {
-    const { title, price, image, id } = this.props;
+    const { title, price, image, id, countItems } = this.props;
     return (
       <>
         <Link to={ `/item/${id}` } data-testid="product-detail-link">
@@ -26,7 +27,7 @@ class ProductCard extends React.Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ this.handleClick }
+          onClick={ () => this.handleClick(countItems) }
         >
           Adicionar ao carrinho
         </button>
@@ -40,6 +41,7 @@ ProductCard.propTypes = {
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  countItems: PropTypes.func.isRequired,
 };
 
 export default ProductCard;
