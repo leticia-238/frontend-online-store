@@ -1,4 +1,5 @@
 import React from 'react';
+import CartItem from '../components/CartItem';
 import { addCart, getCart, removeCart } from '../services/cartFunctions';
 
 class Cart extends React.Component {
@@ -15,13 +16,11 @@ class Cart extends React.Component {
 
   increaseQuantity = (product) => {
     addCart(product);
-    this.setState({
-      productCart: [...getCart()],
-    });
+    this.setState({ productCart: [...getCart()] });
   }
 
-  decreaseQuantity = (title) => {
-    removeCart(title);
+  decreaseQuantity = (product) => {
+    removeCart(product);
     this.setState({ productCart: [...getCart()] });
   }
 
@@ -48,34 +47,14 @@ class Cart extends React.Component {
             : (
               <div>
                 {
-                  productCart.map((product) => (
-                    <div key={ product[0] }>
-                      <h2 data-testid="shopping-cart-product-name">
-                        { product[0] }
-                      </h2>
-                      <p data-testid="shopping-cart-product-quantity">
-                        { product[1].qtd }
-                      </p>
-                      <button
-                        type="button"
-                        data-testid="product-increase-quantity"
-                        onClick={ () => this.increaseQuantity(
-                          { title: product[0], price: product[1].price },
-                        ) }
-                      >
-                        <h2>+</h2>
-                      </button>
-                      <button
-                        type="button"
-                        data-testid="product-decrease-quantity"
-                        onClick={ () => this.decreaseQuantity(
-                          { title: product[0], price: product[1].price },
-                        ) }
-                      >
-                        <h2>-</h2>
-                      </button>
-                    </div>
-                  ))
+                  productCart.map(([title, productInfo]) => (
+                    <CartItem
+                      key={ title }
+                      title={ title }
+                      { ...productInfo }
+                      increaseQuantity={ this.increaseQuantity }
+                      decreaseQuantity={ this.decreaseQuantity }
+                    />))
                 }
               </div>
             )
