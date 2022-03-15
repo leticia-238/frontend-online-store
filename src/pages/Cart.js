@@ -46,43 +46,38 @@ class Cart extends React.Component {
               </h2>
             )
             : (
-              <>
-                <div>
-                  {
-                    productCart.map((product) => (
-                      <div key={ product[0] }>
-                        <h2 data-testid="shopping-cart-product-name">
-                          { product[0] }
-                        </h2>
-                        <p data-testid="shopping-cart-product-quantity">
-                          { product[1].qtd }
-                        </p>
-                        <button
-                          type="button"
-                          data-testid="product-increase-quantity"
-                          onClick={ () => this.increaseQuantity(
-                            { title: product[0], price: product[1].price },
-                          ) }
-                        >
-                          <h2>+</h2>
-                        </button>
-                        <button
-                          type="button"
-                          data-testid="product-decrease-quantity"
-                          onClick={ () => this.decreaseQuantity(
-                            { title: product[0], price: product[1].price },
-                          ) }
-                        >
-                          <h2>-</h2>
-                        </button>
-                      </div>
-                    ))
-                  }
-                </div>
-                <h3 data-testid="shopping-cart-product-quantity">
-                  { this.quantityProducts() }
-                </h3>
-              </>
+              <div>
+                {
+                  productCart.map((product) => (
+                    <div key={ product[0] }>
+                      <h2 data-testid="shopping-cart-product-name">
+                        { product[0] }
+                      </h2>
+                      <p data-testid="shopping-cart-product-quantity">
+                        { product[1].qtd }
+                      </p>
+                      <button
+                        type="button"
+                        data-testid="product-increase-quantity"
+                        onClick={ () => this.increaseQuantity(
+                          { title: product[0], price: product[1].price },
+                        ) }
+                      >
+                        <h2>+</h2>
+                      </button>
+                      <button
+                        type="button"
+                        data-testid="product-decrease-quantity"
+                        onClick={ () => this.decreaseQuantity(
+                          { title: product[0], price: product[1].price },
+                        ) }
+                      >
+                        <h2>-</h2>
+                      </button>
+                    </div>
+                  ))
+                }
+              </div>
             )
         }
       </div>
