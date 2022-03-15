@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormComents from '../components/FormComents';
+import Coments from '../components/Coments';
 import ButtonCart from '../components/buttonCart';
 import { getProductFromId } from '../services/api';
 import { addCart } from '../services/cartFunctions';
@@ -16,9 +16,7 @@ class Item extends React.Component {
 
   componentDidMount() {
     const { params: { id } } = this.props;
-
-    getProductFromId(id).then(({ title, price, ...rest }) => {
-      console.log(rest);
+    getProductFromId(id).then(({ title, price }) => {
       this.setState({ title, price });
     });
   }
@@ -39,9 +37,6 @@ class Item extends React.Component {
         <h3 data-testid="product-detail-name">
           { title }
         </h3>
-        <FormComents
-          productTitle={ title }
-        />
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
@@ -49,6 +44,9 @@ class Item extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        <Coments
+          productTitle={ title }
+        />
       </div>
     );
   }
