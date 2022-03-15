@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 import { addCart, getCart, removeCart } from '../services/cartFunctions';
 
@@ -56,6 +57,14 @@ class Cart extends React.Component {
                       decreaseQuantity={ this.decreaseQuantity }
                     />))
                 }
+                <Link to="/checkout">
+                  <button
+                    type="button"
+                    data-testid="checkout-products"
+                  >
+                    Comprar
+                  </button>
+                </Link>
               </div>
             )
         }
