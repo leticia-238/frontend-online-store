@@ -40,6 +40,12 @@ class Item extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        {productInfo.shipping && (
+          <p>
+
+            Frete Grátis
+          </p>
+        )}
       </div>
     );
   }

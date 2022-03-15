@@ -10,7 +10,8 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { title, price, image, id } = this.props;
+    const { title, price, image, id, shipping } = this.props;
+    const { free_shipping: freeShipping } = shipping;
     return (
       <>
         <Link to={ `/item/${id}` } data-testid="product-detail-link">
@@ -20,6 +21,12 @@ class ProductCard extends React.Component {
           </div>
         </Link>
         <p>{ price }</p>
+        {freeShipping && (
+          <p data-testid="free-shipping">
+
+            Frete grátis
+          </p>
+        )}
         <button
           type="button"
           data-testid="product-add-to-cart"
@@ -37,6 +44,9 @@ ProductCard.propTypes = {
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  shipping: PropTypes.shape({
+    free_shipping: PropTypes.bool,
+  }).isRequired,
 };
 
 export default ProductCard;
