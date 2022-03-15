@@ -1,37 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Coments from '../components/Coments';
+import ButtonCart from '../components/buttonCart';
 import { getProductFromId } from '../services/api';
 import { addCart } from '../services/cartFunctions';
-import ButtonCart from '../components/buttonCart';
 
 class Item extends React.Component {
   constructor() {
     super();
     this.state = {
-      productInfo: [],
+      title: '',
+      price: '',
     };
   }
 
   componentDidMount() {
     const { params: { id } } = this.props;
-    getProductFromId(id).then((response) => {
-      console.log(response);
-      this.setState({ productInfo: response });
+    getProductFromId(id).then(({ title, price }) => {
+      this.setState({ title, price });
     });
   }
 
   handleClick = () => {
-    const { productInfo } = this.state;
-    addCart(productInfo.title);
+    const { title, price } = this.state;
+    addCart({
+      title,
+      price,
+    });
   }
 
   render() {
-    const { productInfo } = this.state;
+    const { title } = this.state;
     return (
       <div>
         <ButtonCart />
         <h3 data-testid="product-detail-name">
-          { productInfo.title }
+          { title }
         </h3>
         <button
           type="button"
@@ -40,13 +44,15 @@ class Item extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        <Coments
+          productTitle={ title }
+        />
       </div>
     );
   }
 }
 
 Item.propTypes = {
-  id: PropTypes.string.isRequired,
   params: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
