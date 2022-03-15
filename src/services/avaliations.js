@@ -8,12 +8,6 @@ export const addAvaliation = (obj) => {
 };
 
 export const getAvaliation = () => {
-  const productAvaliation = [];
-  JSON.parse(localStorage.getItem('avaliation'))
-    .forEach(({ produto }) => {
-      productAvaliation[produto] = {
-        nome: 'andre',
-      };
-    });
-  console.log(productAvaliation);
+  const Avaliation = JSON.parse(localStorage.getItem('avaliation'));
+  return Avaliation;
 };

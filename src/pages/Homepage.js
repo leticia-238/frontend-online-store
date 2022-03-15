@@ -71,7 +71,7 @@ class Homepages extends React.Component {
           <h1 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h1>
-          { List.map(({ id, title, price, thumbnail }) => (
+          { List.map(({ id, title, price, thumbnail, shipping }) => (
             <ProductCard
               key={ id }
               title={ title }
@@ -79,6 +79,7 @@ class Homepages extends React.Component {
               image={ thumbnail }
               id={ id }
               countItems={ this.cartItemsCounter }
+              shipping={ shipping }
             />
           )) }
         </main>
