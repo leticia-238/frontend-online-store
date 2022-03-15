@@ -7,8 +7,8 @@ class ProductCard extends React.Component {
   handleClick = () => {
     const { title, price } = this.props;
     addCart({
-      produto: title,
-      preco: price,
+      title,
+      price,
     });
   }
 
