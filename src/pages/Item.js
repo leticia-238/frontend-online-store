@@ -29,7 +29,7 @@ class Item extends React.Component {
   }
 
   render() {
-    const { title, items } = this.state;
+    const { title, items, shipping } = this.state;
     return (
       <div>
         <ButtonCart items={ items } />
@@ -43,7 +43,7 @@ class Item extends React.Component {
         >
           Adicionar ao carrinho
         </button>
-        {productInfo.shipping && (
+        {shipping && (
           <p>
 
             Frete Grátis
